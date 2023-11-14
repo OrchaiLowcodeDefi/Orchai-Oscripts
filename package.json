@@ -1,0 +1,19 @@
+{
+  "name": "orchai-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OrchaiLendingPool/Orchai-Oscripts.git"
+  },
+  "author": "Orchai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OrchaiLendingPool/Orchai-Oscripts/issues"
+  },
+  "homepage": "https://github.com/OrchaiLendingPool/Orchai-Oscripts#readme"
+}

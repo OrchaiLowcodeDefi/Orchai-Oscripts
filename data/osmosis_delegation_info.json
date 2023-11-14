@@ -1,0 +1,7 @@
+{
+    "language": "node",
+    "parameters": [
+        "osmo1dsa6j7zvqhgwr9pq9wvcaaa9q98y0gec0wc3jv059h7t5hvaqknsrrym56"
+    ],
+    "script_url": "https://raw.githubusercontent.com/trung2891/orchai-oscripts/f55dda2915ecd9c51271cedc96b708d43850288a/src/delegation_osmosis.js"
+}
