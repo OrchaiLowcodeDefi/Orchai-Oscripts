@@ -15,13 +15,13 @@ const main = async (input) => {
     const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${userAccount}`;
     const result = await httpGet(url);
     for (let objectStruct of result.balances) {
-        if(objectStruct.denom == "orai"){
+        if (objectStruct.denom == "orai") {
             responses.push({
                 account: userAccount,
                 amounts: [Number(objectStruct.amount).toFixed(8).toString()]
             });
         }
-    }   
+    }
     console.log(JSON.stringify(responses))
 };
 

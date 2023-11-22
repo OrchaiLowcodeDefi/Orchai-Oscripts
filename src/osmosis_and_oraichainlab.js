@@ -56,8 +56,7 @@ const main = async (symbols) => {
       _price = ["1.000000"];
     } else {
       const resultObj = await getPrice(
-        `https://api-osmosis.imperator.co/tokens/v2/price/${
-          symbolMapping[listSymbols[i]]
+        `https://api-osmosis.imperator.co/tokens/v2/price/${symbolMapping[listSymbols[i]]
         }`
       );
       if (!("message" in resultObj)) {
