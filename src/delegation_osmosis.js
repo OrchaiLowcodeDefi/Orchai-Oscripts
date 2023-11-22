@@ -23,4 +23,4 @@ const main = async (input) => {
   console.log(JSON.stringify(responses));
 };
 
-main(...process.argv.slice(2));
+main("[\"orai1u0vfsjqh0uztlmlwv9cswggn5xkvrt4sayaxme\"]");
