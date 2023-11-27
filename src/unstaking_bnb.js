@@ -1,3 +1,4 @@
+import _ from "https://deno.land/std@0.120.0/node/module.ts";
 import { ethers } from "npm:ethers@5.7.2";
 import { CosmWasmClient } from "npm:@cosmjs/cosmwasm-stargate@^0.29.5"
 
