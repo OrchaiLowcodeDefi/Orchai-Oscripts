@@ -1,11 +1,6 @@
 import { ethers } from "npm:ethers@5.7.2";
 import { CosmWasmClient } from "npm:@cosmjs/cosmwasm-stargate@^0.29.5"
 
-interface UnstakeRequest {
-  id: string;
-  amount: string;
-}
-
 const stakingAbi = [
   {
     "inputs": [],
@@ -68,11 +63,11 @@ const stakingContract = new ethers.Contract(
   rpcProvider
 )
 
-async function getLastUnstakingIdBNB(): Promise<number> {
+async function getLastUnstakingIdBNB() {
   return await stakingContract.lastUnstakingRequestId();
 }
 
-async function getLastUnstakingIdOraichain(): Promise<number> {
+async function getLastUnstakingIdOraichain() {
   const client = await CosmWasmClient.connect("https://rpc.orai.io");
   const result = await client.queryContractSmart(
     "orai17sy5njqjt2skvk3d9pxtywsvjf2rasnfhkptsg8xc57v35tdkluqhd3t5l",
@@ -90,13 +85,13 @@ const main = async () => {
       getLastUnstakingIdOraichain(),
     ]);
 
-    let requests: UnstakeRequest[] = [];
+    let requests = [];
 
-    let promises: Promise<UnstakeRequest>[] = [];
+    let promises = [];
 
     if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
       for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
-        let promise = (async (): Promise<UnstakeRequest> => {
+        let promise = (async () => {
           let unstakeRequest = await stakingContract.unstakingRequests(i);
           return {
             id: String(i),
