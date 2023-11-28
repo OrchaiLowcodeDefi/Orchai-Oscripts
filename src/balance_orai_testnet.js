@@ -11,8 +11,7 @@ const httpGet = async (url) => {
 
 const main = async (input) => {
     const responses = [];
-    // let userAccount = JSON.parse(input)[0];
-    const userAccount = "orai1u0vfsjqh0uztlmlwv9cswggn5xkvrt4sayaxme";
+    let userAccount = JSON.parse(input)[0];
     const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${userAccount}`;
     const result = await httpGet(url);
     for (let objectStruct of result.balances) {
