@@ -81,8 +81,6 @@ async function getLastUnstakingIdBNB() {
 
 const main = async (argvParams) => {
   const lastStakingBNB = await getLastUnstakingIdBNB();
-  console.log(lastStakingBNB);
-
   console.log(JSON.stringify(lastStakingBNB));
   // const [lastUnstakingIdBNB, lastUnstakingIdOraichain] = await Promise.all([
   //   getLastUnstakingIdBNB(),
