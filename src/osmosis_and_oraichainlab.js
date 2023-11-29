@@ -64,13 +64,13 @@ const main = async (symbols) => {
         if (listSymbols[i] == "STATOM") {
           exchangeRate = parseFloat(
             await getExchangeRate(
-              "https://stride-fleet.main.stridenet.co/api/Stride-Labs/stride/stakeibc/host_zone/cosmoshub-4"
+              "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/cosmoshub-4"
             )
           ).toFixed(8);
         } else if (listSymbols[i] == "STOSMO") {
           exchangeRate = parseFloat(
             await getExchangeRate(
-              "https://stride-fleet.main.stridenet.co/api/Stride-Labs/stride/stakeibc/host_zone/osmosis-1"
+              "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/osmosis-1"
             )
           ).toFixed(8);
         }
