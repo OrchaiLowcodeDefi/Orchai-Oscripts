@@ -80,7 +80,7 @@ import _ from "https://deno.land/std@0.120.0/node/module.ts";
 // }
 
 const main = async (argvParams) => {
-  console.log(JSON.stringify(argvParams));
+  console.log(JSON.stringify("Hello deno"));
   // const [lastUnstakingIdBNB, lastUnstakingIdOraichain] = await Promise.all([
   //   getLastUnstakingIdBNB(),
   //   getLastUnstakingIdOraichain(),
