@@ -80,31 +80,29 @@ async function getLastUnstakingIdOraichain() {
 }
 
 const main = async (argvParams) => {
-  try {
-    const [lastUnstakingIdBNB, lastUnstakingIdOraichain] = await Promise.all([
-      getLastUnstakingIdBNB(),
-      getLastUnstakingIdOraichain(),
-    ]);
+  const [lastUnstakingIdBNB, lastUnstakingIdOraichain] = await Promise.all([
+    getLastUnstakingIdBNB(),
+    getLastUnstakingIdOraichain(),
+  ]);
 
-    let requests = [];
+  let requests = [];
 
-    let promises = [];
+  let promises = [];
 
-    if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
-      for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
-        let promise = (async () => {
-          let unstakeRequest = await stakingContract.unstakingRequests(i);
-          return {
-            id: String(i),
-            amount: String(Number(unstakeRequest.amount) / Number(1e12)),
-          };
-        })();
-        promises.push(promise);
-      }
+  if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
+    for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
+      let promise = (async () => {
+        let unstakeRequest = await stakingContract.unstakingRequests(i);
+        return {
+          id: String(i),
+          amount: String(Number(unstakeRequest.amount) / Number(1e12)),
+        };
+      });
+      promises.push(promise);
     }
-    requests = await Promise.all(promises);
-    console.log(JSON.stringify(requests));
-  } catch (err) { }
+  }
+  requests = await Promise.all(promises);
+  console.log(JSON.stringify(requests));
 }
 
 main(...process.argv.slice(2))
