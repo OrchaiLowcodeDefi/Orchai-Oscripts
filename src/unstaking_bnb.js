@@ -1,7 +1,5 @@
 import _ from "https://deno.land/std@0.120.0/node/module.ts";
 import { ethers } from "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js"
-// import { ethers } from "npm:ethers@5.5.1";
-// import { CosmWasmClient } from "npm:@cosmjs/cosmwasm-stargate@0.28.13"
 
 const httpGet = async (url) => {
   const data = await fetch(url).then(data => data.json());
@@ -75,35 +73,27 @@ async function getLastUnstakingIdBNB() {
 }
 
 const main = async (argvParams) => {
-  const result = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai17sy5njqjt2skvk3d9pxtywsvjf2rasnfhkptsg8xc57v35tdkluqhd3t5l/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
-  const lastStakingBNB = await getLastUnstakingIdBNB();
-  console.log(JSON.stringify(lastStakingBNB));
-  // console.log(JSON.stringify(result));
-  // const [lastUnstakingIdBNB, lastUnstakingIdOraichain] = await Promise.all([
-  //   getLastUnstakingIdBNB(),
-  //   getLastUnstakingIdOraichain(),
-  // ]);
+  const lastUnstakingIdBNB = await getLastUnstakingIdBNB();
+  const lastUnstakingIdOraichain = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai17sy5njqjt2skvk3d9pxtywsvjf2rasnfhkptsg8xc57v35tdkluqhd3t5l/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
 
-  // console.log(lastUnstakingIdBNB, lastUnstakingIdOraichain);
+  let requests = [];
 
-  // let requests = [];
+  let promises = [];
 
-  // let promises = [];
-
-  // if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
-  //   for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
-  //     let promise = (async () => {
-  //       let unstakeRequest = await stakingContract.unstakingRequests(i);
-  //       return {
-  //         id: String(i),
-  //         amount: String(Number(unstakeRequest.amount) / Number(1e12)),
-  //       };
-  //     });
-  //     promises.push(promise);
-  //   }
-  // }
-  // requests = await Promise.all(promises);
-  // console.log(JSON.stringify(requests));
+  if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
+    for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
+      let promise = (async () => {
+        let unstakeRequest = await stakingContract.unstakingRequests(i);
+        return {
+          id: String(i),
+          amount: String(Number(unstakeRequest.amount) / Number(1e12)),
+        };
+      });
+      promises.push(promise);
+    }
+  }
+  requests = await Promise.all(promises);
+  console.log(JSON.stringify(requests));
 }
 
 main(...process.argv.slice(2))
