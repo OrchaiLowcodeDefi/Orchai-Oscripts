@@ -79,7 +79,7 @@ import _ from "https://deno.land/std@0.120.0/node/module.ts";
 //   return result;
 // }
 
-const main = async () => {
+const main = async (argvParams) => {
 
   console.log(JSON.stringify("Hello deno"))
   // try {
@@ -109,4 +109,4 @@ const main = async () => {
   // } catch (err) { }
 }
 
-main()
+main(...process.argv.slice(2))
