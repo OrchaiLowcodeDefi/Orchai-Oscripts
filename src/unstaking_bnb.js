@@ -81,14 +81,14 @@ const main = async () => {
   let promises = [];
 
   if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
-    for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
+    for (let i = 0; i <= lastUnstakingIdBNB; ++i) {
       let promise = (async () => {
         let unstakeRequest = await stakingContract.unstakingRequests(i);
         return {
           id: String(i),
           amount: String(Number(unstakeRequest.amount) / Number(1e12)),
         };
-      });
+      })();
       promises.push(promise);
     }
   }
