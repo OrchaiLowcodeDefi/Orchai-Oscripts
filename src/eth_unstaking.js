@@ -82,7 +82,6 @@ const main = async () => {
 
     if (Number(lastUnstakingIdETH) > lastUnstakingIdOraichain.data) {
         for (let i = lastUnstakingIdOraichain.data; i < Number(lastUnstakingIdETH); ++i) {
-            console.log(i);
             let promise = (async () => {
                 let unstakeRequest = await stakingContract.unstakingRequests(i + 1);
                 return {
