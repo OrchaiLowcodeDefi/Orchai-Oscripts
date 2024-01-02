@@ -74,7 +74,7 @@ async function getLastUnstakingIdETH() {
 
 const main = async () => {
     const lastUnstakingIdETH = await getLastUnstakingIdETH();
-    const lastUnstakingIdOraichain = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai12jp9wwvg583hnc4ssdaag96562sellfa840s037l4xe9dtah4zfsqpdx4t/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
+    const lastUnstakingIdOraichain = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai127l967w5qjv2r75fyzeq08h0na9rjjy9e0xadjqczc0qpvepwakqlc9vkg/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
 
     let requests = [];
 
