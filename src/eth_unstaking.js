@@ -73,30 +73,26 @@ async function getLastUnstakingIdETH() {
 }
 
 const main = async () => {
-    // const lastUnstakingIdETH = await getLastUnstakingIdETH();
-    // const lastUnstakingIdOraichain = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai127l967w5qjv2r75fyzeq08h0na9rjjy9e0xadjqczc0qpvepwakqlc9vkg/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
+    const lastUnstakingIdETH = await getLastUnstakingIdETH();
+    const lastUnstakingIdOraichain = await httpGet("https://lcd.orai.io/cosmwasm/wasm/v1/contract/orai127l967w5qjv2r75fyzeq08h0na9rjjy9e0xadjqczc0qpvepwakqlc9vkg/smart/eyJsYXN0X3Vuc3Rha2luZ19pZCI6e319");
 
-    // let requests = [];
+    let requests = [];
 
-    // let promises = [];
+    let promises = [];
 
-    // if (Number(lastUnstakingIdETH) > lastUnstakingIdOraichain.data) {
-    //     for (let i = lastUnstakingIdOraichain.data; i < Number(lastUnstakingIdETH); ++i) {
-    //         let promise = (async () => {
-    //             let unstakeRequest = await stakingContract.unstakingRequests(i + 1);
-    //             return {
-    //                 id: String(i),
-    //                 amount: String(Number(unstakeRequest.amount) / Number(1e12)),
-    //             };
-    //         })();
-    //         promises.push(promise);
-    //     }
-    // }
-    // requests = await Promise.all(promises);
-    requests = [{
-        id: "14",
-        amount: "123123"
-    }]
+    if (Number(lastUnstakingIdETH) > lastUnstakingIdOraichain.data) {
+        for (let i = lastUnstakingIdOraichain.data; i < Number(lastUnstakingIdETH); ++i) {
+            let promise = (async () => {
+                let unstakeRequest = await stakingContract.unstakingRequests(i + 1);
+                return {
+                    id: String(i),
+                    amount: String(Number(unstakeRequest.amount) / Number(1e12)),
+                };
+            })();
+            promises.push(promise);
+        }
+    }
+    requests = await Promise.all(promises);
     console.log(JSON.stringify(requests));
 }
 
