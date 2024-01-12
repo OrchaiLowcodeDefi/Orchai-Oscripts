@@ -81,9 +81,9 @@ const main = async () => {
     let promises = [];
 
     if (Number(lastUnstakingIdETH) > lastUnstakingIdOraichain.data) {
-        for (let i = lastUnstakingIdOraichain.data; i < Number(lastUnstakingIdETH); ++i) {
+        for (let i = lastUnstakingIdOraichain.data + 1; i <= Number(lastUnstakingIdETH); ++i) {
             let promise = (async () => {
-                let unstakeRequest = await stakingContract.unstakingRequests(i + 1);
+                let unstakeRequest = await stakingContract.unstakingRequests(i);
                 return {
                     id: String(i),
                     amount: String(Number(unstakeRequest.amount) / Number(1e12)),
