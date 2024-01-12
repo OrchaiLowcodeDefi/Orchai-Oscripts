@@ -82,7 +82,7 @@ const main = async () => {
   let promises = [];
 
   if (lastUnstakingIdBNB > lastUnstakingIdOraichain) {
-    for (let i = 0; i <= lastUnstakingIdBNB; ++i) {
+    for (let i = lastUnstakingIdOraichain; i <= lastUnstakingIdBNB; ++i) {
       let promise = (async () => {
         let unstakeRequest = await stakingContract.unstakingRequests(i);
         return {
