@@ -63,6 +63,7 @@ const main = async (symbols) => {
           symbolMapping[listSymbols[i]]
         }`
       );
+      let priceUsd = parseFloat(resultObj.current_price).toFixed(8);
       _name = listSymbols[i];
       _price = [priceUsd];
     } else {
