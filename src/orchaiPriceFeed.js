@@ -43,6 +43,7 @@ const main = async (symbols) => {
     INJ: "injective",
     OCH: "OCH",
     ETH: "ETH",
+    BTC: "BTC",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
