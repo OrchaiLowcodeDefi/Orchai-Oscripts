@@ -41,6 +41,9 @@ const main = async (symbols) => {
     OSMO: "OSMO",
     STOSMO: "OSMO",
     INJ: "injective",
+    BTC: "BTC",
+    ETH: "ETH",
+    OCH: "OCH",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
