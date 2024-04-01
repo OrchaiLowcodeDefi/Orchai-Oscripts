@@ -41,8 +41,6 @@ const main = async (symbols) => {
     OSMO: "OSMO",
     STOSMO: "OSMO",
     INJ: "injective",
-    BTC: "BTC",
-    ETH: "ETH",
     OCH: "OCH",
   };
 
@@ -54,7 +52,6 @@ const main = async (symbols) => {
         symbolMapping[listSymbols[i]]
       }`
     );
-    console.log(resultObj);
     if (!("message" in resultObj)) {
       let exchangeRate = 1;
       if (listSymbols[i] == "STATOM") {
@@ -86,3 +83,5 @@ const main = async (symbols) => {
 };
 
 main(...process.argv.slice(2));
+
+// deno run --allow-net ./src/orchaiPriceFeed.js '["[\"ETH\",\"BTC\",\"OCH\"]"]'

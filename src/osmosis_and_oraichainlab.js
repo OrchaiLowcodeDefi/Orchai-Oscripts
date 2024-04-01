@@ -41,8 +41,6 @@ const main = async (symbols) => {
     OSMO: "OSMO",
     STOSMO: "OSMO",
     INJ: "INJ",
-    BTC: "BTC",
-    ETH: "ETH",
     OCH: "OCH",
   };
 
@@ -57,7 +55,7 @@ const main = async (symbols) => {
     } else if (listSymbols[i] == `USDT`) {
       _name = listSymbols[i];
       _price = ["1.000000"];
-    } else if (["BTC", "ETH", "OCH"].includes(listSymbols[i])) {
+    } else if (["OCH"].includes(listSymbols[i])) {
       const resultObj = await getPrice(
         `https://api.orchai.io/lending/mainnet/token/${
           symbolMapping[listSymbols[i]]
@@ -104,3 +102,5 @@ const main = async (symbols) => {
 };
 
 main(...process.argv.slice(2));
+
+// deno run --allow-net ./src/osmosis_and_oraichainlab.js '["[\"ETH\",\"BTC\",\"OCH\"]"]'
