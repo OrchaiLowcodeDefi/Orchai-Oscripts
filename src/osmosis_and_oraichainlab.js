@@ -41,6 +41,9 @@ const main = async (symbols) => {
     OSMO: "OSMO",
     STOSMO: "OSMO",
     INJ: "INJ",
+    BTC: "BTC",
+    ETH: "ETH",
+    OCH: "OCH",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
@@ -54,9 +57,18 @@ const main = async (symbols) => {
     } else if (listSymbols[i] == `USDT`) {
       _name = listSymbols[i];
       _price = ["1.000000"];
+    } else if (["BTC", "ETH", "OCH"].includes(listSymbols[i])) {
+      const resultObj = await getPrice(
+        `https://api.orchai.io/lending/mainnet/token/${
+          symbolMapping[listSymbols[i]]
+        }`
+      );
+      _name = listSymbols[i];
+      _price = [priceUsd];
     } else {
       const resultObj = await getPrice(
-        `https://api-osmosis.imperator.co/tokens/v2/price/${symbolMapping[listSymbols[i]]
+        `https://api-osmosis.imperator.co/tokens/v2/price/${
+          symbolMapping[listSymbols[i]]
         }`
       );
       if (!("message" in resultObj)) {
