@@ -42,6 +42,7 @@ const main = async (symbols) => {
     STOSMO: "OSMO",
     INJ: "injective",
     OCH: "OCH",
+    ETH: "ETH",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
