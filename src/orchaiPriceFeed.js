@@ -47,43 +47,46 @@ const main = async (symbols) => {
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
-    let _name = ``;
-    let _price = ``;
-    const resultObj = await getPrice(
-      `https://api.orchai.io/lending/mainnet/token/${
-        symbolMapping[listSymbols[i]]
-      }`
-    );
-    if (!("message" in resultObj)) {
-      let exchangeRate = 1;
-      if (listSymbols[i] == "STATOM") {
-        exchangeRate = parseFloat(
-          await getExchangeRate(
-            "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/cosmoshub-4"
-          )
-        ).toFixed(8);
-      } else if (listSymbols[i] == "STOSMO") {
-        exchangeRate = parseFloat(
-          await getExchangeRate(
-            "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/osmosis-1"
-          )
-        ).toFixed(8);
+    try {
+      let _name = ``;
+      let _price = ``;
+      const resultObj = await getPrice(
+        `https://api.orchai.io/lending/mainnet/token/${
+          symbolMapping[listSymbols[i]]
+        }`
+      );
+      if (resultObj == undefined) continue;
+      if (!("message" in resultObj)) {
+        let exchangeRate = 1;
+        if (listSymbols[i] == "STATOM") {
+          exchangeRate = parseFloat(
+            await getExchangeRate(
+              "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/cosmoshub-4"
+            )
+          ).toFixed(8);
+        } else if (listSymbols[i] == "STOSMO") {
+          exchangeRate = parseFloat(
+            await getExchangeRate(
+              "https://stride-api.polkachu.com/Stride-Labs/stride/stakeibc/host_zone/osmosis-1"
+            )
+          ).toFixed(8);
+        }
+        let priceUsd = parseFloat(resultObj.current_price).toFixed(8);
+        priceUsd = priceUsd * exchangeRate;
+        _name = listSymbols[i];
+        _price = [parseFloat(priceUsd).toFixed(8)];
       }
-      let priceUsd = parseFloat(resultObj.current_price).toFixed(8);
-      priceUsd = priceUsd * exchangeRate;
-      _name = listSymbols[i];
-      _price = [parseFloat(priceUsd).toFixed(8)];
-    }
-    if (_name != `` && _price != ``) {
-      responses.push({
-        name: _name,
-        prices: _price,
-      });
-    }
+      if (_name != `` && _price != ``) {
+        responses.push({
+          name: _name,
+          prices: _price,
+        });
+      }
+    } catch (err) {}
   }
   console.log(JSON.stringify(responses));
 };
 
 main(...process.argv.slice(2));
 
-// deno run --allow-net ./src/orchaiPriceFeed.js '["[\"ETH\",\"BTC\",\"OCH\"]"]'
+// deno run --allow-net ./src/orchaiPriceFeed.js '["[\"ETH\",\"BTC\",\"OCH\",\"USDT\",\"ORAI\",\"ATOM\",\"STATOM\",\"OSMO\",\"STOSMO\",\"INJ\"]"]'
