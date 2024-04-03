@@ -7,25 +7,25 @@ const httpGet = async (url) => {
 
 const getPrice = async (url, count) => {
   try {
-    if (count > 10) return null;
+    // if (count > 10) return null;
     const result = await httpGet(url);
     const resultObj = result;
     return resultObj;
   } catch (error) {
-    console.log("Error");
-    setTimeout(getPrice, 5000, url, count + 1);
+    // console.log("Error");
+    // setTimeout(getPrice, 5000, url, count + 1);
   }
 };
 
 const getExchangeRate = async (url, count2) => {
   try {
-    if (count2 > 10) return null;
+    // if (count2 > 10) return null;
     const result = await httpGet(url);
     const exchangeRate = result.host_zone.redemption_rate;
     return exchangeRate;
   } catch (error) {
-    console.log("Error");
-    setTimeout(getPrice, 5000, url, count2 + 1);
+    // console.log("Error");
+    // setTimeout(getPrice, 5000, url, count2 + 1);
   }
 };
 
