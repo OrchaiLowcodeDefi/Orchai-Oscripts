@@ -43,6 +43,7 @@ const main = async (symbols) => {
     OCH: "OCH",
     ETH: "ETH",
     BTC: "BTC",
+    ORAIX: "ORAIX",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
