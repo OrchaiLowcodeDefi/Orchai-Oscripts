@@ -44,6 +44,7 @@ const main = async (symbols) => {
     OCH: "OCH",
     BTC: "BTC",
     ETH: "ETH",
+    ORAIX: "ORAIX",
   };
 
   for (let i = 0; i < listSymbols.length; i++) {
@@ -58,7 +59,7 @@ const main = async (symbols) => {
       } else if (listSymbols[i] == `USDT`) {
         _name = listSymbols[i];
         _price = ["1.000000"];
-      } else if (["OCH", "BTC"].includes(listSymbols[i])) {
+      } else if (["OCH", "BTC", "ORAIX"].includes(listSymbols[i])) {
         const resultObj = await getPrice(
           `https://api.orchai.io/lending/mainnet/token/${
             symbolMapping[listSymbols[i]]
