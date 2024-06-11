@@ -34,6 +34,7 @@ const main = async (symbols) => {
 
   const symbolMapping = {
     USDT: "USDT",
+    USDC: "USDC",
     ORAI: "ORAI",
     ATOM: "ATOM",
     STATOM: "ATOM",
@@ -51,8 +52,7 @@ const main = async (symbols) => {
       let _name = ``;
       let _price = ``;
       const resultObj = await getPrice(
-        `https://api.orchai.io/lending/mainnet/token/${
-          symbolMapping[listSymbols[i]]
+        `https://api.orchai.io/lending/mainnet/token/${symbolMapping[listSymbols[i]]
         }`
       );
       if (resultObj == undefined) continue;
@@ -82,7 +82,7 @@ const main = async (symbols) => {
           prices: _price,
         });
       }
-    } catch (err) {}
+    } catch (err) { }
   }
   console.log(JSON.stringify(responses));
 };
